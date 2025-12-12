@@ -1,4 +1,4 @@
-// app.js - présuppose les compat SDKs importés via index.html (compat mode)
+// app.js - prÃ©suppose les compat SDKs importÃ©s via index.html (compat mode)
 (function(){
   // REMPLACE ces valeurs par celles de ton projet Firebase
   const firebaseConfig = {
@@ -75,4 +75,5 @@
     });
   }
 })();
+
 
