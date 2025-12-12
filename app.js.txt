@@ -1,0 +1,78 @@
+// app.js - présuppose les compat SDKs importés via index.html (compat mode)
+(function(){
+  // REMPLACE ces valeurs par celles de ton projet Firebase
+  const firebaseConfig = {
+    apiKey: "REPLACE_API_KEY",
+    authDomain: "REPLACE_AUTH_DOMAIN",
+    databaseURL: "https://REPLACE_PROJECT_ID.firebaseio.com",
+    projectId: "REPLACE_PROJECT_ID",
+    storageBucket: "REPLACE_PROJECT_ID.appspot.com",
+    messagingSenderId: "REPLACE_SENDER_ID",
+    appId: "REPLACE_APP_ID"
+  };
+
+  // Init Firebase (compat)
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  // utils UI
+  const countEl = document.getElementById('visitors-count');
+  const noteEl = document.getElementById('visitors-note');
+  const yearEl = document.getElementById('year');
+  yearEl.textContent = new Date().getFullYear();
+
+  // PRESENCE LOGIC
+  // create a unique key for this tab/session
+  const clientKey = 'visitor_' + Math.random().toString(36).substr(2, 9) + Date.now();
+
+  const presenceRef = database.ref('/presence/' + clientKey);
+
+  // set presence object (can add metadata e.g. user agent or level)
+  const now = Date.now();
+  const payload = {
+    connectedAt: now,
+    ua: navigator.userAgent,
+    page: window.location.pathname
+  };
+
+  // write presence and ensure removal on disconnect
+  presenceRef.set(payload)
+    .then(() => {
+      // ensure removal
+      presenceRef.onDisconnect().remove().catch(err => {
+        console.warn('onDisconnect failed', err);
+      });
+    })
+    .catch(err => {
+      console.error('Failed to set presence:', err);
+    });
+
+  // listen for changes in presence folder and update count
+  const presRootRef = database.ref('/presence/');
+  presRootRef.on('value', snapshot => {
+    const val = snapshot.val() || {};
+    const count = Object.keys(val).length;
+    countEl.textContent = count;
+    noteEl.textContent = count > 0 ? `${count} personne(s) en ligne` : 'Personne en ligne';
+  }, error => {
+    console.error('presence read error', error);
+    noteEl.textContent = 'Impossible de lire le compteur';
+  });
+
+  // Optional: when the window unloads, ensure removal (onDisconnect covers most cases)
+  window.addEventListener('beforeunload', () => {
+    // best-effort remove
+    try { presenceRef.remove(); } catch(e){ /* noop */ }
+  });
+
+  // Mobile nav toggle (small)
+  const hamb = document.getElementById('hamburger');
+  const nav = document.querySelector('.main-nav');
+  if(hamb){
+    hamb.addEventListener('click', () => {
+      if(nav.style.display === 'flex') nav.style.display = 'none';
+      else nav.style.display = 'flex';
+    });
+  }
+})();
+
