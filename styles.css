@@ -28,10 +28,44 @@ body{margin:0;background:var(--bg);color:#0f1724;line-height:1.45}
 .visitors-card small{color:var(--muted)}
 
 /* features */
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
-.card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 12px rgba(15,23,36,0.04)}
-.card h4{margin:0 0 8px}
-.small-btn{display:inline-block;margin-top:10px;padding:8px 10px;border-radius:8px;background:var(--primary);color:#fff;text-decoration:none;font-size:13px}
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-top:26px;
+}
+
+.card{
+  display:block;
+  background:var(--card);
+  padding:16px;
+  border-radius:12px;
+  box-shadow:0 6px 12px rgba(15,23,36,0.04);
+  text-decoration:none;
+  color:inherit;
+  transition:transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(15,23,36,0.08);
+}
+
+.card p{
+  margin:0;
+  color:var(--muted);
+}
+
+.small-btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 10px;
+  border-radius:8px;
+  background:var(--primary);
+  color:#fff;
+  font-size:13px;
+}
 
 /* footer */
 .site-footer{padding:18px 24px;text-align:center;color:var(--muted);margin-top:40px}
@@ -44,4 +78,5 @@ body{margin:0;background:var(--bg);color:#0f1724;line-height:1.45}
   .main-nav{display:none}
   .hamburger{display:block}
 }
+
 
