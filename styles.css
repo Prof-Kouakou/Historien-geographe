@@ -76,7 +76,36 @@ body{margin:0;background:var(--bg);color:#0f1724;line-height:1.45}
   .hero-right{width:100%}
   .features{grid-template-columns:repeat(1,1fr)}
   .main-nav{display:none}
-  .hamburger{display:block}
+  ..hamburger{
+  display:none;
+  background:transparent;
+  border:0;
+  padding:4px;
+  cursor:pointer;
 }
+
+.hamburger-line,
+.hamburger-line::before,
+.hamburger-line::after{
+  display:block;
+  width:22px;
+  height:2px;
+  border-radius:999px;
+  background:#fff;
+  position:relative;
+}
+
+.hamburger-line::before,
+.hamburger-line::after{
+  content:"";
+  position:absolute;
+  left:0;
+}
+
+.hamburger-line::before{ top:-6px; }
+.hamburger-line::after{ top:6px; }
+  
+}
+
 
 
