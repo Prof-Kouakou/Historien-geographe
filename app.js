@@ -67,13 +67,13 @@
 
   // Mobile nav toggle (small)
   const hamb = document.getElementById('hamburger');
-  const nav = document.querySelector('.main-nav');
-  if(hamb){
-    hamb.addEventListener('click', () => {
-      if(nav.style.display === 'flex') nav.style.display = 'none';
-      else nav.style.display = 'flex';
-    });
-  }
-})();
+const nav = document.querySelector('.main-nav');
+if (hamb && nav) {
+  hamb.addEventListener('click', () => {
+    nav.classList.toggle('open');
+  });
+}
+  
+
 
 
