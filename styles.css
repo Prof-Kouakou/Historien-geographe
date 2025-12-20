@@ -13,6 +13,45 @@ body{margin:0;background:var(--bg);color:#0f1724;line-height:1.6}
 .main-nav a{color:#fff;text-decoration:none;font-weight:500;font-size:14px}
 .hamburger{display:none;background:transparent;color:#fff;border:0;font-size:22px}
 
+/* =========================
+   IMAGE D’ENTÊTE (HERO)
+   ========================= */
+
+.hero{
+  min-height: 420px;
+  background-image: url("images/eleves-header.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 40px;
+}
+
+/* Voile sombre pour lisibilité du texte */
+.hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Met le contenu au-dessus de l’image */
+.hero-left,
+.hero-right{
+  position: relative;
+  z-index: 1;
+}
+
+/* Texte clair sur l’image */
+.hero-left h2,
+.hero-left p{
+  color: #ffffff;
+}
+
+/* Bouton outline visible sur image */
+.btn.outline{
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
 /* container */
 .container{max-width:1100px;margin:24px auto;padding:0 16px}
 .hero{display:flex;gap:20px;align-items:center;justify-content:space-between}
@@ -121,6 +160,7 @@ body{margin:0;background:var(--bg);color:#0f1724;line-height:1.6}
 .hamburger-line::after{ top:6px; }
   
 }
+
 
 
 
